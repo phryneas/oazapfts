@@ -242,8 +242,11 @@ export default class ApiGenerator {
     let ref = this.refs[$ref];
     if (!ref) {
       const schema = this.resolve<OpenAPIV3.SchemaObject>(obj);
+      const removeChars = ['\/', '.', '-']
       const name = this.getUniqueAlias(
-        _.upperFirst(schema.title || this.getRefBasename($ref))
+        _.upperFirst(
+          (schema.title || this.getRefBasename($ref)).split(new RegExp(`[${removeChars.join('|')}]`)).map((s, i) => `${i === 0 ? '' : '__'}${s.charAt(0).toUpperCase()}${s.slice(1)}`).join('')
+        )
       );
 
       ref = this.refs[$ref] = factory.createTypeReferenceNode(name, undefined);
