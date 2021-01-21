@@ -1,6 +1,6 @@
 {
   "name": "@phryneas/experimental-oazapfts",
-  "version": "0.1.2-0",
+  "version": "0.1.2-1",
   "description": "OpenApi TypeScript client generator",
   "main": "lib/index.js",
   "bin": {
